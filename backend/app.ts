@@ -4,10 +4,11 @@ import cors from "cors";
 import * as bodyParser from "body-parser";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import { countryRouter } from "./controller/country.routes";
 
 const app = express();
 dotenv.config();
-const port = process.env.APP_PORT || 9000;
+const port = process.env.APP_PORT || 3000;
 
 const swaggerOpts = {
   definition: {
@@ -33,3 +34,5 @@ app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.listen(port || 3000, () => {
   console.log(`Back-end is running on port ${port}.`);
 });
+
+app.use("/countries", countryRouter)
